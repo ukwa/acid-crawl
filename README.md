@@ -14,6 +14,16 @@ The idea would be to run a workflow along these lines:
 * At the end, check the logs are sane, check the output has what is expected in it.
 * Use the warcprox recordings to cross-check the WARC contents from Heritrix3.
 
+Cases
+-----
+
+* Normal GETs, 200s, redirects, etc.
+* Byte-range requests:
+    * Presumably we should grab the whole thing in this case?
+    * See [this related OpenWayback issue](https://github.com/iipc/openwayback/pull/263)
+* 206 Partial Content
+    * See [this example](https://github.com/ikreymer/pywb/issues/144)
+
 
 Components
 ----------
