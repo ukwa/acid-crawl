@@ -61,13 +61,13 @@ metadata.description=UK Legal Deposit Test Crawl.
   </bean>
 <!-- GEO-LOOKUP: specifying location of external database. -->
   <bean id="externalGeoLookup" class="uk.bl.wap.modules.deciderules.ExternalGeoLookup">
-    <property name="database" value="jobs/bl-test-job/GeoLite2-City.mmdb"/>
+    <property name="database" value="/GeoLite2-City.mmdb"/>
   </bean>
 
 <!-- SCOPE: rules for which discovered URIs to crawl; order is very 
       important because last decision returned other than 'NONE' wins. -->
   <bean id="scope" class="org.archive.modules.deciderules.DecideRuleSequence">
-    <property name="logToFile" value="true"/>
+    <property name="logToFile" value="false"/>
     <property name="rules">
       <list>
 <!-- Begin by REJECTing all... -->
@@ -318,19 +318,20 @@ metadata.description=UK Legal Deposit Test Crawl.
   <bean id="extractorJson" class="uk.bl.wap.modules.extractor.ExtractorJson">
   </bean>
   <!--bean id="extractorMq" class="uk.bl.wap.modules.extractor.AsynchronousMQExtractor">
-    <property name="host" value="localhost"/>
+    <property name="host" value="rabbitmq"/>
     <property name="routingKey" value="phantomjs"/>
     <property name="queue" value="phantomjs"/>
     <property name="durable" value="true"/>
     <property name="outputPath" value="REPLACE_HERITRIX_JOBS/dc0-20150827/action/"/>
   </bean-->
   <bean id="extractorMq" class="org.archive.modules.AMQPPublishProcessor">
-    <property name="clientId" value="dc0-20150827"/>
-    <property name="routingKey" value="phantomjs-domain"/>
+    <property name="clientId" value="bl-test-crawl"/>
+    <property name="routingKey" value="bl-test-crawl-outgoing-for-webrender"/>
     <property name="exchange" value="heritrix"/>
-    <property name="amqpUri" value="amqp://guest:guest@localhost:5672/%2f"/>
+    <property name="amqpUri" value="amqp://guest:guest@rabbitmq:5672/%2f"/>
     <property name="shouldProcessRule">
         <bean class="org.archive.modules.deciderules.DecideRuleSequence">
+            <property name="logToFile" value="true"/>
             <property name="rules">
                 <list>
                     <!-- Begin by REJECTing all... -->
@@ -351,12 +352,12 @@ metadata.description=UK Legal Deposit Test Crawl.
     </property>
   </bean>
   <bean class="org.archive.crawler.frontier.AMQPUrlReceiver">
-    <property name="amqpUri" value="amqp://guest:guest@localhost:5672/%2f"/>
+    <property name="amqpUri" value="amqp://guest:guest@rabbitmq:5672/%2f"/>
     <property name="exchange" value="heritrix"/>
-    <property name="queueName" value="dc0-20150827"/>
+    <property name="queueName" value="bl-test-crawl-incoming-urls"/>
   </bean>
   <bean id="viralContent" class="uk.bl.wap.crawler.processor.ViralContentProcessor">
-    <property name="clamdHost" value="localhost"/>
+    <property name="clamdHost" value="clamd"/>
     <property name="clamdPort" value="3310"/>
     <property name="clamdTimeout" value="60000"/>
     <property name="streamMaxLength" value="94371840"/>
@@ -447,7 +448,7 @@ metadata.description=UK Legal Deposit Test Crawl.
 <!-- <property name="directory" value="${launchId}" /> -->
     <property name="storePaths">
       <list>
-        <value>viral</value>
+        <value>/output/viral</value>
       </list>
     </property>
 <!-- <property name="template" value="${prefix}-${timestamp17}-${serialno}-${heritrix.pid}~${heritrix.hostname}~${heritrix.port}" /> -->
@@ -488,7 +489,7 @@ metadata.description=UK Legal Deposit Test Crawl.
 <!-- <property name="directory" value="${launchId}" /> -->
     <property name="storePaths">
       <list>
-        <value>warcs</value>
+        <value>/output/warcs</value>
       </list>
     </property>
 <!-- <property name="template" value="${prefix}-${timestamp17}-${serialno}-${heritrix.pid}~${heritrix.hostname}~${heritrix.port}" /> -->
@@ -532,12 +533,12 @@ metadata.description=UK Legal Deposit Test Crawl.
   </bean>
 <!-- CRAWLCONTROLLER: Control interface, unifying context -->
   <bean id="crawlController" class="org.archive.crawler.framework.CrawlController">
-    <property name="maxToeThreads" value="200"/>
+    <property name="maxToeThreads" value="5"/>
 <!-- <property name="pauseAtStart" value="true" /> -->
     <property name="runWhileEmpty" value="true"/>
 <!-- <property name="recorderInBufferBytes" value="524288" /> -->
 <!-- <property name="recorderOutBufferBytes" value="16384" /> -->
-    <property name="scratchDir" value="scratch"/>
+    <property name="scratchDir" value="/scratch"/>
   </bean>
 <!-- FRONTIER: Record of all URIs discovered and queued-for-collection -->
   <bean id="frontier" class="org.archive.crawler.frontier.BdbFrontier">
@@ -941,9 +942,9 @@ metadata.description=UK Legal Deposit Test Crawl.
    <property name="monitorConfigPaths" value="false"/>
    <property name="monitorPaths">
      <list>
-       <value>warcs</value>
-       <value>viral</value>
-       <value>state</value>
+       <value>/output</value>
+       <value>/scratch</value>
+       <value>/state</value>
      </list>
    </property>
  </bean>
@@ -984,7 +985,7 @@ metadata.description=UK Legal Deposit Test Crawl.
   </bean>
 <!-- CRAWLERLOGGERMODULE: shared logging facility -->
   <bean id="loggerModule" class="org.archive.crawler.reporting.CrawlerLoggerModule">
-    <property name="path" value="logs"/>
+    <property name="path" value="/output/logs"/>
 <!-- <property name="crawlLogPath" value="crawl.log" /> -->
 <!-- <property name="alertsLogPath" value="alerts.log" /> -->
 <!-- <property name="progressLogPath" value="progress-statistics.log" /> -->
@@ -1000,7 +1001,7 @@ metadata.description=UK Legal Deposit Test Crawl.
  </bean>
 <!-- BDBMODULE: shared BDB-JE disk persistence manager -->
   <bean id="bdb" class="org.archive.bdb.BdbModule">
-    <property name="dir" value="state"/>
+    <property name="dir" value="/state"/>
 <!-- if neither cachePercent or cacheSize are specified (the default), bdb
        uses its own default of 60% -->
     <property name="cachePercent" value="30"/>
