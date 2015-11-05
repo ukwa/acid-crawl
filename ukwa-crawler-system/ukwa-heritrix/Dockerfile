@@ -36,9 +36,11 @@ EXPOSE 8443
 
 ENV FOREGROUND true
 
-ENV JAVA_OPTS -Xmx1g
+ENV JAVA_OPTS -Xmx2g
 
 VOLUME /jobs
+
+VOLUME /output
 
 CMD ./heritrix-3.3.0-SNAPSHOT/bin/heritrix -a heritrix:heritrix -b 0.0.0.0 -j /jobs
 

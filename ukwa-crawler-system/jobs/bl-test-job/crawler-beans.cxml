@@ -325,9 +325,9 @@ metadata.description=UK Legal Deposit Test Crawl.
     <property name="outputPath" value="REPLACE_HERITRIX_JOBS/dc0-20150827/action/"/>
   </bean-->
   <bean id="extractorMq" class="org.archive.modules.AMQPPublishProcessor">
-    <property name="clientId" value="bl-test-crawl"/>
-    <property name="routingKey" value="bl-test-crawl-outgoing-for-webrender"/>
+    <property name="clientId" value="ukwa-test-crawl"/>
     <property name="exchange" value="heritrix"/>
+    <property name="routingKey" value="ukwa-test-crawl-to-webrender"/>
     <property name="amqpUri" value="amqp://guest:guest@rabbitmq:5672/%2f"/>
     <property name="shouldProcessRule">
         <bean class="org.archive.modules.deciderules.DecideRuleSequence">
@@ -354,7 +354,7 @@ metadata.description=UK Legal Deposit Test Crawl.
   <bean class="org.archive.crawler.frontier.AMQPUrlReceiver">
     <property name="amqpUri" value="amqp://guest:guest@rabbitmq:5672/%2f"/>
     <property name="exchange" value="heritrix"/>
-    <property name="queueName" value="bl-test-crawl-incoming-urls"/>
+    <property name="queueName" value="ukwa-test-crawl"/>
   </bean>
   <bean id="viralContent" class="uk.bl.wap.crawler.processor.ViralContentProcessor">
     <property name="clamdHost" value="clamd"/>
@@ -938,7 +938,7 @@ metadata.description=UK Legal Deposit Test Crawl.
 <!-- DISK SPACE MONITOR: 
       Pauses the crawl if disk space at monitored paths falls below minimum threshold -->
  <bean id="diskSpaceMonitor" class="org.archive.crawler.monitor.DiskSpaceMonitor">
-   <property name="pauseThresholdMiB" value="1048576"/>
+   <property name="pauseThresholdMiB" value="1024"/>
    <property name="monitorConfigPaths" value="false"/>
    <property name="monitorPaths">
      <list>
