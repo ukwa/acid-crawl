@@ -21,11 +21,14 @@ ukwa-heritrix:
   links:
     - rabbitmq
     - clamd
+    - aat
 
 ukwa-webrender:
   build: ./ukwa-webrender
   ports:
     - "8000:8000"
+  links:
+    - aat
 
 ukwa-harchiverd:
   build: ./ukwa-harchiverd
@@ -35,7 +38,14 @@ ukwa-harchiverd:
     - rabbitmq
     - ukwa-webrender
 
+# A test server to crawl - the Archival Acid Test site by Mat Kelly:
+aat:
+  build: ../docker-archival-acid-test
+  ports:
+    - "80:5000"
+  hostname: acid
+  domainname: matkelly.com
+
 # To Add:
-# a test server to crawl
 # a tester process to talk to Heritrix, probably via python-heritrix
 
