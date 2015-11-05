@@ -1,18 +1,14 @@
 import os
-from flask import Flask, request, send_from_directory, render_template
+from flask import Flask, request, send_from_directory, render_template, abort
 
 # set the project root directory as the static folder, you can set others.
 app = Flask(__name__, static_url_path='')
 
 
-@app.route('/')
-def root():
-    return render_template('homepage.html')
-
-@app.route('/simple/', defaults={'req_path': ''})
-@app.route('/simple/<path:req_path>')
+@app.route('/', defaults={'req_path': ''})
+@app.route('/<path:req_path>')
 def dir_listing(req_path):
-    BASE_DIR = 'static/simple'
+    BASE_DIR = 'static'
 
     # Joining the base and the requested path
     abs_path = os.path.join(BASE_DIR, req_path)
@@ -28,10 +24,6 @@ def dir_listing(req_path):
     # Show directory contents
     files = os.listdir(abs_path)
     return render_template('files.html', files=files)
-
-@app.route('/archivalAcidTest/<path:path>')
-def send_js(path):
-    return send_from_directory('static/archivalAcidTest', path)
 
 if __name__ == "__main__":
         app.run(host='0.0.0.0',debug=True)
