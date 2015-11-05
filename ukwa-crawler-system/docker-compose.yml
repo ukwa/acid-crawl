@@ -21,6 +21,18 @@ ukwa-heritrix:
     - rabbitmq
     - clamd
 
+ukwa-webrender:
+  build: ./ukwa-webrender
+  ports:
+    - "8000:8000"
+
+ukwa-harchiverd:
+  build: ./ukwa-harchiverd
+  links:
+    - rabbitmq
+    - ukwa-webrender
+
 # To Add:
 # a test server to crawl
 # a tester process to talk to Heritrix, probably via python-heritrix
+

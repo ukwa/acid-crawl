@@ -327,7 +327,7 @@ metadata.description=UK Legal Deposit Test Crawl.
   <bean id="extractorMq" class="org.archive.modules.AMQPPublishProcessor">
     <property name="clientId" value="ukwa-test-crawl"/>
     <property name="exchange" value="heritrix"/>
-    <property name="routingKey" value="ukwa-test-crawl-to-webrender"/>
+    <property name="routingKey" value="to-webrender"/>
     <property name="amqpUri" value="amqp://guest:guest@rabbitmq:5672/%2f"/>
     <property name="shouldProcessRule">
         <bean class="org.archive.modules.deciderules.DecideRuleSequence">
