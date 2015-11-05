@@ -1,16 +1,4 @@
-rabbitmq:
-  image: rabbitmq:3.5-management
-  ports:
-    - "15672:15672"  # management port (guest:guest)
-    - "5672:5672"   # amqp port
-    - "25672:25672" # cluster port
-  log_driver: "none"
-
-clamd:
-  build: ./ukwa-clamd
-  ports:
-    - "3310:3310"
-
+# UKWA Heritrix
 ukwa-heritrix:
   build: ./ukwa-heritrix
   volumes:
@@ -19,10 +7,26 @@ ukwa-heritrix:
   ports:
     - "8443:8443"
   links:
-    - rabbitmq
-    - clamd
     - aat
+    - clamd
+    - rabbitmq
 
+# Clamd virus scanning Service
+clamd:
+  build: ./ukwa-clamd
+  ports:
+    - "3310:3310"
+
+# RabbitMQ
+rabbitmq:
+  image: rabbitmq:3.5-management
+  ports:
+    - "15672:15672"  # management port (guest:guest)
+    - "5672:5672"   # amqp port
+    - "25672:25672" # cluster port
+  log_driver: none
+
+# PhantomJS web page rendering service
 ukwa-webrender:
   build: ./ukwa-webrender
   ports:
@@ -30,6 +34,7 @@ ukwa-webrender:
   links:
     - aat
 
+# HAR Daemon
 ukwa-harchiverd:
   build: ./ukwa-harchiverd
   volumes:
@@ -46,6 +51,5 @@ aat:
   hostname: acid
   domainname: matkelly.com
 
-# To Add:
 # a tester process to talk to Heritrix, probably via python-heritrix
-
+# ...
