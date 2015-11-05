@@ -4,6 +4,7 @@ rabbitmq:
     - "15672:15672"  # management port (guest:guest)
     - "5672:5672"   # amqp port
     - "25672:25672" # cluster port
+  log_driver: "none"
 
 clamd:
   build: ./ukwa-clamd
