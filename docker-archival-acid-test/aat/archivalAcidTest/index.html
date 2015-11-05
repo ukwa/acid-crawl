@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded',function(){
 	
 	//Test 2d init AJAX
 	var xhr = new XMLHttpRequest();
-	xhr.open('GET','/archivalAcidTest/pixel.png',true);
+	xhr.open('GET','/pixel.png',true);
 	xhr.responseType = 'arraybuffer';
 	xhr.onload = function(e) {
 		document.getElementById('test2d').src = "data:image/png;base64,"+base64ArrayBuffer(e.currentTarget.response);
@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded',function(){
 	
 	//Test 10 init AJAX
 	var xhr = new XMLHttpRequest();
-	xhr.open('GET','/archivalAcidTest/pixel.png',true); 
+	xhr.open('GET','/pixel.png',true); 
 	try{
 		xhr.responseType = 'arraybuffer';	//response type of synchronous request should not be changeable, INVALID_ACCESS_ERR: DOM Exception 15
 		xhr.onload = function(e) {
