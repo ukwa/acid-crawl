@@ -12,11 +12,14 @@ RUN \
   git clone https://github.com/ukwa/python-daemonize.git && \
   cd python-daemonize && python setup.py install && cd ..
 
+WORKDIR python-har-daemon
+
+RUN \
+  git checkout json-format
+
 COPY settings.py /python-har-daemon/harchiverd/settings.py
 
 COPY runner.py /python-har-daemon/runner.py
-
-WORKDIR python-har-daemon
 
 VOLUME /logs
 

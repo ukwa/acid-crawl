@@ -28,6 +28,8 @@ ukwa-webrender:
 
 ukwa-harchiverd:
   build: ./ukwa-harchiverd
+  volumes:
+    - ./output/images:/images
   links:
     - rabbitmq
     - ukwa-webrender
