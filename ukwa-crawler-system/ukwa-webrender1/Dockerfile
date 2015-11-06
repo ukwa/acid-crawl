@@ -1,18 +1,13 @@
 FROM centos:7
 
 RUN \
-  yum -y install gcc gcc-c++ make flex bison gperf ruby \
-  openssl-devel freetype-devel fontconfig-devel libicu-devel sqlite-devel \
-  libpng-devel libjpeg-devel
-
-RUN \
-  yum -y install git && \
-  git clone https://github.com/ariya/phantomjs.git && \
-  cd phantomjs && git checkout 2.0 && ./build.sh --confirm --jobs 1 
+  yum -y install wget bzip2 && \
+  curl -O -L https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-1.9.8-linux-x86_64.tar.bz2 && \
+  bunzip2 phantomjs-1.9.8-linux-x86_64.tar.bz2 && tar xf phantomjs-1.9.8-linux-x86_64.tar 
 
 RUN \
   yum install -y epel-release && \
-  yum install -y git python-pip python-devel && \
+  yum install -y git python-pip python-devel libpng-devel libjpeg-devel gcc gcc-c++ make && \
   pip install Django==1.8.6 && \
   pip install Pillow pika
 
