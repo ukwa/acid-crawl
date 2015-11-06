@@ -252,6 +252,7 @@ metadata.description=UK Legal Deposit Test Crawl.
 <!-- <property name="calculateRobotsOnly" value="false" /> -->
   </bean>
   <bean id="fetchDns" class="org.archive.modules.fetcher.FetchDNS">
+    <property name="acceptNonDnsResolves" value="true" />
 <!-- <property name="acceptNonDnsResolves" value="false" /> -->
 <!-- <property name="digestContent" value="true" /> -->
 <!-- <property name="digestAlgorithm" value="sha1" /> -->
