@@ -25,7 +25,7 @@ logger.addHandler(handler)
 logger.setLevel(logging.INFO)
 
 # Wait so RabbitMQ has time to come up...
-time.sleep(10)
+time.sleep(15)
 
 if __name__ == "__main__":
         warcwriter = WarcWriterPool(gzip=True, output_dir=settings.OUTPUT_DIRECTORY)
