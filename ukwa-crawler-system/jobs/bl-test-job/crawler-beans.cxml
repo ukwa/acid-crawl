@@ -252,6 +252,10 @@ metadata.description=UK Legal Deposit Test Crawl.
 <!-- <property name="calculateRobotsOnly" value="false" /> -->
   </bean>
   <bean id="fetchDns" class="org.archive.modules.fetcher.FetchDNS">
+    <!-- The following is only invoked if DNS lookup fails. 
+         See https://github.com/internetarchive/heritrix3/blob/master/modules/src/main/java/org/archive/modules/fetcher/FetchDNS.java#L74-L78
+             http://www.dnsjava.org/doc/org/xbill/DNS/ResolverConfig.html 
+         (i.e. /etc/hosts does not override domain names for H3 -->
     <property name="acceptNonDnsResolves" value="true" />
 <!-- <property name="acceptNonDnsResolves" value="false" /> -->
 <!-- <property name="digestContent" value="true" /> -->
@@ -949,7 +953,7 @@ metadata.description=UK Legal Deposit Test Crawl.
    </property>
  </bean>
  <bean id="diskSpaceMonitorRoot" class="org.archive.crawler.monitor.DiskSpaceMonitor">
-   <property name="pauseThresholdMiB" value="1024"/>
+   <property name="pauseThresholdMiB" value="100"/>
    <property name="monitorConfigPaths" value="true"/>
    <property name="monitorPaths">
      <list>

@@ -4,10 +4,11 @@ ukwa-heritrix:
   volumes:
     - ./jobs:/jobs
     - ./output:/output
+    - ./scratch:/scratch
+    - ./state:/state
   ports:
     - "8443:8443"
   links:
-    - acid.matkelly.com
     - clamd
     - rabbitmq
 
@@ -28,11 +29,11 @@ rabbitmq:
 
 # PhantomJS web page rendering service
 ukwa-webrender:
-  build: ./ukwa-webrender
+  build: ./ukwa-webrender1
   ports:
     - "8000:8000"
   links:
-    - acid.matkelly.com
+    - acid-clone.matkelly.com
 
 # HAR Daemon
 ukwa-harchiverd:
@@ -43,12 +44,12 @@ ukwa-harchiverd:
     - rabbitmq
     - ukwa-webrender
 
-# A test server to crawl - the Archival Acid Test site by Mat Kelly:
-acid.matkelly.com:
+# A test server to crawl - a clone the Archival Acid Test site by Mat Kelly:
+acid-clone.matkelly.com:
   build: ../docker-archival-acid-test
   ports:
     - "5000:80"
-  hostname: acid
+  hostname: acid-clone
   domainname: matkelly.com
 
 # a tester process to talk to Heritrix, probably via python-heritrix

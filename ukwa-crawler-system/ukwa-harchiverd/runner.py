@@ -24,7 +24,7 @@ handler.setFormatter(formatter)
 logger.addHandler(handler)
 logger.setLevel(logging.INFO)
 
-# Wait so RabbitMQ has time to come up...
+# Wait so RabbitMQ has time to come up - should really wait and retry rather than have to do this.
 time.sleep(15)
 
 if __name__ == "__main__":
