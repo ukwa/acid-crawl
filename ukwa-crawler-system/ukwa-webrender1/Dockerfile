@@ -9,7 +9,7 @@ RUN \
   yum install -y epel-release && \
   yum install -y git python-pip python-devel libpng-devel libjpeg-devel gcc gcc-c++ make && \
   pip install Django==1.8.6 && \
-  pip install Pillow pika
+  pip install Pillow pika gunicorn
 
 RUN \
   yum -y install fontconfig libfontenc fontconfig-devel \
@@ -27,4 +27,4 @@ RUN \
 
 EXPOSE 8000
 
-CMD python manage.py runserver 0.0.0.0:8000
+CMD gunicorn -c gunicorn.ini wsgi:application
