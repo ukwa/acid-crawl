@@ -44,6 +44,25 @@ ukwa-harchiverd:
     - rabbitmq
     - ukwa-webrender
 
+# OpenWayback, based loosely on UNB Libraries Dockerfile
+openwayback:
+  build: ./openwayback
+  volumes:
+    - ./output/cdx/:/data/
+  ports:
+    - "8080:8080"
+  environment:
+    - WAYBACK_BASEDIR=/data
+    - WAYBACK_URL_HOST=192.168.99.100
+
+# docker run --rm \
+#    --name openwayback \
+#    -p 8080:8080 \
+#    -e WAYBACK_HOST=wayback.yourdomain.com \
+#    -v /local/data/CDX:/data/CDX \
+#    -v /local/data/WARC:/data/WARC \
+#    unblibraries/openwayback
+
 # A test server to crawl - a clone the Archival Acid Test site by Mat Kelly:
 acid-clone.matkelly.com:
   build: ../docker-archival-acid-test
