@@ -6,23 +6,18 @@ RUN \
   pip install pika warctools requests
 
 RUN \
-  git clone https://github.com/ukwa/python-har-daemon.git && \
   git clone https://github.com/ukwa/python-warcwriterpool.git && \
-  cd python-warcwriterpool && python setup.py install && cd .. && \
-  git clone https://github.com/ukwa/python-daemonize.git && \
-  cd python-daemonize && python setup.py install && cd ..
+  cd python-warcwriterpool && python setup.py install
+
+RUN \
+  git clone https://github.com/ukwa/python-har-daemon.git && echo done
 
 WORKDIR python-har-daemon
 
-RUN \
-  git checkout json-format
-
 COPY settings.py /python-har-daemon/harchiverd/settings.py
-
-COPY runner.py /python-har-daemon/runner.py
 
 VOLUME /logs
 
 VOLUME /images
 
-CMD python runner.py
+CMD python harchiverd/harchiverd.py
