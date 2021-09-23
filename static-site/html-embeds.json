@@ -1,0 +1,17 @@
+{
+    "url":"http://filesthatlast.com",
+    "expected":{
+        "sha256":"",
+        "statusCode":"200",
+    },
+    "archives":{
+        "url": "http://web.archive.org/web/20130420141504/http://filesthatlast.com"
+    },
+    "dependencies": {
+        "url": "http://s0.wp.com/_static/??-eJyNj9EKgzAMRX9oXaYbvo19i7a1RmNTbErx71f2oIIge7sh55AbyEFp9mK9wJxUoOTQRyCcbITRSmj1pH7TXcd4gwPeEbtdYOes4SSqZyLOkNE4KyfpcAN9jx5l3cJfsAx2LtVC6sCz2NCaKy0OvIhmU4xCQSQsceCstsWVHTiWf6jFBaKsdGbPZXbwM7+rZ9PUVV29HuMX9GaHtw=="
+        "url": "http://s1.wp.com/_static/??-eJyFkOsOwiAMhV9IxGli/GN8FjY6UmSAa5Ho08sWt8TrEhJ6wnfaU2SOAn3jkgaStpxLgv72vNaWVvIfIDo0vWKYwCZ4Bs8DFwNxB0TKfHt9HYP+ipAXMQscVXMWPRDeP7rWLhgRXTLoSZbagA6JRRucC1lm1Ab43dOl2YG+RY98m4tvy1NEv/gp618U5TbUFpqPGFOGK2oIUhEBj4ZRx7Iu/QnO6EALo5wbIryo4jp1x2q332+ranfY2AdoL7m/",
+        "url": "http://s0.wp.com/_static/??-eJyNy0EOgjAQheELUUZB2BnPQoYJdCyd2mlBbi8sJKyMu5f/5YMlGBSfyCdghZ5mixTeJWsBp2vKJrg8WK+go8SE0pPugF+Z4lriio7+RurstkZZzNF/WOyiZCUHTCl0+DTfsJnHdL/WbVvdLk1T8wdZXkxz",
+        "url": "http://s1.wp.com/_static/??-eJx9zM0KAjEMBOAXMsauy97EZ4k1tl3TH5oU8e0FYQ+ieBpm4Bt8NPC1GBfDPKDJCKkotqoGN6HUUSP1VMKWe6+6w9/KU69DWXBla+TvsA3/kCXhKwQS4f78bF/MImdWjDMGqRd6/57zyR2XZXKTmw/rC0AATNE=",
+    }
+    
+}

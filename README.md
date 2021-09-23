@@ -14,6 +14,11 @@ The idea would be to run a workflow along these lines:
 * At the end, check the logs are sane, check the output has what is expected in it.
 * Use the warcprox recordings to cross-check the WARC contents from Heritrix3.
 
+This repo is intended to provide docker images containing servers that 
+deliver the test resources, and the expected results. The testing processes 
+will be elsewhere (for now at least).
+
+
 Cases
 -----
 
