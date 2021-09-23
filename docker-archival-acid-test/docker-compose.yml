@@ -1,0 +1,21 @@
+version: '3.7'
+
+services:
+
+  # Local version of the Archival Acid Test: http://acid.matkelly.com
+  acidtest:
+    #image: ukwa/archival-acid-test
+    build:
+      context: .
+      args:
+        http_proxy: ${HTTP_PROXY}
+        https_proxy: ${HTTPS_PROXY}
+    ports:
+      - "5080:5000"
+    networks:
+      default:
+        aliases:
+          - acid.matkelly.com
+          - www.cs.odu.edu # Emulating the remote host via a simple alias.
+
+

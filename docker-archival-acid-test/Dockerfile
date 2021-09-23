@@ -1,8 +1,6 @@
-FROM centos:7
+FROM python:3
 
 RUN \
-  yum install -y epel-release && \
-  yum install -y git python-pip && \
   pip install flask
 
 COPY aat /aat
