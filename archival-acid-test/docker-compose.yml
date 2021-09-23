@@ -11,7 +11,7 @@ services:
         http_proxy: ${HTTP_PROXY}
         https_proxy: ${HTTPS_PROXY}
     ports:
-      - "5080:5000"
+      - "5080:80"
     networks:
       default:
         aliases:
